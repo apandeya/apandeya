@@ -1,7 +1,6 @@
 - 👋 Hi, I’m @apandeya
 - 👀 I’m interested in full stack web development.
-- 🌱 I’m currently learning design patterns.
-- 📫 Reach me at @akpamdeya on twitter.
+- 🌱 I’m currently learning TDD.
 
 <!---
 apandeya/apandeya is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
