@@ -1,3 +1,4 @@
+[![Avanindra's GitHub stats](https://github-readme-stats.vercel.app/api?username=anuraghazra)](https://github.com/apandeya/github-readme-stats)
 - 👋 Hi, I’m @apandeya
 - 👀 I’m interested in full stack web development.
 - 🌱 I’m currently learning TDD.
