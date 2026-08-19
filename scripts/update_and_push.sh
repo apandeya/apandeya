@@ -12,12 +12,12 @@ git pull --ff-only origin main
 
 python3 scripts/gen_coding_velocity.py
 
-if [ -z "$(git status --porcelain -- stats/coding-velocity.svg)" ]; then
+if [ -z "$(git status --porcelain -- stats/ README.md)" ]; then
   echo "No changes, skipping commit."
   exit 0
 fi
 
-git add stats/coding-velocity.svg
+git add stats/ README.md
 git commit -m "chore: refresh coding velocity stats"
 git push origin main
 echo "Pushed update."

@@ -1,19 +1,20 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 300" width="760" height="300" font-family="Helvetica, Arial, sans-serif">
   <style>
-    .bg { fill: #0d1117; }
-    .card { fill: #161b22; stroke: rgba(255,255,255,0.08); }
-    .title { fill: #e6edf3; font-size: 15px; font-weight: 700; }
-    .sub { fill: #8b949e; font-size: 11px; }
-    .axis { fill: #8b949e; font-size: 10px; }
-    .grid { stroke: #30363d; stroke-width: 1; }
-    .val { fill: #c9d1d9; font-size: 10px; font-family: "SF Mono", Consolas, monospace; }
-    .bar-pre { fill: #3987e5; }
-    .bar-ai { fill: #d95926; }
-    .yr { fill: #8b949e; font-size: 11px; }
+    .bg { fill: #ffffff; }
+    .title { fill: #1f2328; font-size: 15px; font-weight: 700; }
+    .sub { fill: #656d76; font-size: 11px; }
+    .grid { stroke: #d0d7de; stroke-width: 1; }
+    .val { fill: #57606a; font-size: 10px; font-family: "SF Mono", Consolas, monospace; }
+    .bar-pre { fill: #2a78d6; }
+    .bar-ai { fill: #eb6834; }
+    .yr { fill: #656d76; font-size: 11px; }
+    .trend { fill: none; stroke: #1f2328; stroke-width: 1.5; stroke-dasharray: 3 3; opacity: 0.6; }
+    .trend-dot { fill: #1f2328; }
   </style>
   <rect class="bg" width="760" height="300" rx="10"/>
   <text x="24" y="30" class="title">Lines changed per active coding day</text>
   <text x="24" y="48" class="sub">personal commit history, aggregated by year (* = partial year)</text>
+<path d="M 100.5 222.4 L 217.5 219.5 L 334.5 224.0 L 451.5 237.5 L 568.5 216.2 L 685.5 94.8" class="trend"/>
 <line x1="50" x2="736" y1="196.7" y2="196.7" class="grid"/>
 <line x1="50" x2="736" y1="133.3" y2="133.3" class="grid"/>
 <line x1="50" x2="736" y1="70.0" y2="70.0" class="grid"/>
@@ -35,4 +36,10 @@
 <rect x="635.0" y="94.8" width="101.0" height="165.2" rx="4" class="bar-ai"/>
 <text x="685.5" y="86.8" text-anchor="middle" class="val">3,046</text>
 <text x="685.5" y="280.0" text-anchor="middle" class="yr">2026*</text>
+<circle cx="100.5" cy="222.4" r="2.5" class="trend-dot"/>
+<circle cx="217.5" cy="219.5" r="2.5" class="trend-dot"/>
+<circle cx="334.5" cy="224.0" r="2.5" class="trend-dot"/>
+<circle cx="451.5" cy="237.5" r="2.5" class="trend-dot"/>
+<circle cx="568.5" cy="216.2" r="2.5" class="trend-dot"/>
+<circle cx="685.5" cy="94.8" r="2.5" class="trend-dot"/>
 </svg>

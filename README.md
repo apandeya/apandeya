@@ -2,7 +2,15 @@
 - 🛠️ Backend & data engineer
 - 🌱 Currently exploring AI-assisted / agentic coding workflows — see the chart below 👇
 
-![Coding velocity by year](stats/coding-velocity.svg)
+<!-- CHART:START -->
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="stats/coding-velocity-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="stats/coding-velocity-light.svg">
+  <img alt="Coding velocity by year" src="stats/coding-velocity-light.svg">
+</picture>
+
+🔥 Active on 23 of the last 30 days &nbsp;·&nbsp; _last updated 2026-08-19_
+<!-- CHART:END -->
 
 <!-- STATS:START -->
 | Year | Commits | LOC changed | Active days | LOC/day | Median LOC/commit | Mean LOC/commit | Repos touched |
