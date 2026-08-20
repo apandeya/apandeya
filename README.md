@@ -9,8 +9,11 @@
   <img alt="Coding velocity by year" src="stats/coding-velocity-light.svg">
 </picture>
 
-🔥 Active on 23 of the last 30 days &nbsp;·&nbsp; _last updated 2026-08-19_
+🔥 Active on 22 of the last 30 days &nbsp;·&nbsp; _last updated 2026-08-20_
 <!-- CHART:END -->
+
+<details>
+<summary>Full year-by-year breakdown ▾</summary>
 
 <!-- STATS:START -->
 | Year | Commits | LOC changed | Active days | LOC/day | Median LOC/commit | Mean LOC/commit | Repos touched |
@@ -24,6 +27,8 @@
 
 \* partial year
 <!-- STATS:END -->
+
+</details>
 
 <!---
 apandeya/apandeya is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.

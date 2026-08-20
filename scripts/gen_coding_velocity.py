@@ -39,25 +39,28 @@ THEMES = {
         "sub": "#8b949e",
         "grid": "#30363d",
         "val": "#c9d1d9",
-        "yr": "#8b949e",
-        "bar_pre": "#3987e5",
-        "bar_ai": "#d95926",
-        "trend": "#e6edf3",
-        "trend_dot": "#f0f0f0",
+        "delta": "#8b949e",
+        "trend": "#8b949e",
+        "trend_dot": "#d95926",
     },
     "light": {
         "bg": "#ffffff",
         "title": "#1f2328",
         "sub": "#656d76",
         "grid": "#d0d7de",
-        "val": "#57606a",
-        "yr": "#656d76",
-        "bar_pre": "#2a78d6",
-        "bar_ai": "#eb6834",
-        "trend": "#1f2328",
-        "trend_dot": "#1f2328",
+        "val": "#1f2328",
+        "delta": "#656d76",
+        "trend": "#8c959f",
+        "trend_dot": "#eb6834",
     },
 }
+
+METRICS = [
+    {"key": "loc_per_day", "label": "LOC / active day", "fmt": lambda v: f"{round(v):,}"},
+    {"key": "median", "label": "Median commit size", "fmt": lambda v: f"{v:g}"},
+    {"key": "cpd", "label": "Commits / active day", "fmt": lambda v: f"{v:.1f}"},
+    {"key": "repos_touched", "label": "Repos touched", "fmt": lambda v: f"{v:g}"},
+]
 
 
 def load_author_pattern():
@@ -167,68 +170,83 @@ def build_rows(year_stats):
             "median": median(s["sizes"]),
             "mean": round(loc / commits, 1) if commits else 0,
             "repos_touched": len(s["repos"]),
+            "cpd": commits / days,
             "partial": str(today.year) == year,
         })
     return rows
 
 
-SVG_TEMPLATE = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 300" width="760" height="300" font-family="Helvetica, Arial, sans-serif">
+SVG_TEMPLATE = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 130" width="760" height="130" font-family="Helvetica, Arial, sans-serif">
   <style>
     .bg {{ fill: {bg}; }}
-    .title {{ fill: {title}; font-size: 15px; font-weight: 700; }}
-    .sub {{ fill: {sub}; font-size: 11px; }}
-    .grid {{ stroke: {grid}; stroke-width: 1; }}
-    .val {{ fill: {val}; font-size: 10px; font-family: "SF Mono", Consolas, monospace; }}
-    .bar-pre {{ fill: {bar_pre}; }}
-    .bar-ai {{ fill: {bar_ai}; }}
-    .yr {{ fill: {yr}; font-size: 11px; }}
-    .trend {{ fill: none; stroke: {trend}; stroke-width: 1.5; stroke-dasharray: 3 3; opacity: 0.6; }}
-    .trend-dot {{ fill: {trend_dot}; }}
+    .label {{ fill: {sub}; font-size: 10.5px; letter-spacing: 0.02em; }}
+    .value {{ fill: {val}; font-size: 17px; font-weight: 700; font-family: "SF Mono", Consolas, monospace; }}
+    .delta {{ fill: {delta}; font-size: 10px; font-family: "SF Mono", Consolas, monospace; }}
+    .div {{ stroke: {grid}; stroke-width: 1; }}
+    .spark {{ fill: none; stroke: {trend}; stroke-width: 1.6; }}
+    .spark-dot {{ fill: {trend_dot}; }}
+    .point {{ fill: {delta}; font-size: 8.5px; font-family: "SF Mono", Consolas, monospace; }}
   </style>
-  <rect class="bg" width="760" height="300" rx="10"/>
-  <text x="24" y="30" class="title">Lines changed per active coding day</text>
-  <text x="24" y="48" class="sub">personal commit history, aggregated by year{partial_note}</text>
-{bars}
+  <rect class="bg" width="760" height="130" rx="10"/>
+{panels}
 </svg>
 """
 
 
 def render_svg(rows, theme_name):
     theme = THEMES[theme_name]
-    pad_l, pad_r, pad_t, pad_b = 50, 24, 70, 40
-    width, height = 760, 300
-    plot_w = width - pad_l - pad_r
-    plot_h = height - pad_t - pad_b
+    width, height = 760, 130
+    outer_pad, gap = 20, 14
+    n_panels = len(METRICS)
+    panel_w = (width - 2 * outer_pad - gap * (n_panels - 1)) / n_panels
+
+    spark_top, spark_bottom = 68, 106
     n = len(rows)
-    gap = 16
-    bar_w = (plot_w - gap * (n - 1)) / n if n else 0
-    max_v = max((r["loc_per_day"] for r in rows), default=1) * 1.15
 
     parts = []
-    for i in range(1, 4):
-        y = pad_t + plot_h - plot_h * i / 3
-        parts.append(f'<line x1="{pad_l}" x2="{width - pad_r}" y1="{y:.1f}" y2="{y:.1f}" class="grid"/>')
+    for i, metric in enumerate(METRICS):
+        x0 = outer_pad + i * (panel_w + gap)
+        values = [r[metric["key"]] for r in rows]
+        last, prev = values[-1], values[-2] if len(values) > 1 else None
+        delta_txt = ""
+        if prev:
+            pct = (last - prev) / prev * 100
+            arrow = "▲" if pct >= 0 else "▼"
+            delta_txt = f"{arrow} {abs(pct):.0f}%"
 
-    centers = []
-    for i, r in enumerate(rows):
-        x = pad_l + i * (bar_w + gap)
-        h = (r["loc_per_day"] / max_v) * plot_h
-        y = pad_t + plot_h - h
-        cls = "bar-ai" if r["loc_per_day"] > 1000 else "bar-pre"
-        parts.append(f'<rect x="{x:.1f}" y="{y:.1f}" width="{bar_w:.1f}" height="{max(h, 2):.1f}" rx="4" class="{cls}"/>')
-        parts.append(f'<text x="{x + bar_w/2:.1f}" y="{y - 8:.1f}" text-anchor="middle" class="val">{round(r["loc_per_day"]):,}</text>')
-        label = r["year"] + ("*" if r["partial"] else "")
-        parts.append(f'<text x="{x + bar_w/2:.1f}" y="{height - pad_b + 20:.1f}" text-anchor="middle" class="yr">{label}</text>')
-        centers.append((x + bar_w / 2, y))
+        parts.append(f'<text x="{x0:.1f}" y="20" class="label">{metric["label"]}</text>')
+        parts.append(f'<text x="{x0:.1f}" y="42" class="value">{metric["fmt"](last)}</text>')
+        if delta_txt:
+            parts.append(f'<text x="{x0:.1f}" y="57" class="delta">{delta_txt} vs prior yr</text>')
 
-    if len(centers) > 1:
-        path_d = "M " + " L ".join(f"{cx:.1f} {cy:.1f}" for cx, cy in centers)
-        parts.insert(0, f'<path d="{path_d}" class="trend"/>')
-        for cx, cy in centers:
-            parts.append(f'<circle cx="{cx:.1f}" cy="{cy:.1f}" r="2.5" class="trend-dot"/>')
+        vmin, vmax = min(values), max(values)
+        span = (vmax - vmin) or 1
+        pts = []
+        for j, v in enumerate(values):
+            px = x0 + (j / (n - 1) * panel_w if n > 1 else panel_w / 2)
+            py = spark_bottom - ((v - vmin) / span) * (spark_bottom - spark_top)
+            pts.append((px, py))
+        path_d = "M " + " L ".join(f"{px:.1f} {py:.1f}" for px, py in pts)
+        parts.append(f'<path d="{path_d}" class="spark"/>')
+        parts.append(f'<circle cx="{pts[-1][0]:.1f}" cy="{pts[-1][1]:.1f}" r="2.8" class="spark-dot"/>')
 
-    partial_note = " (* = partial year)" if any(r["partial"] for r in rows) else ""
-    return SVG_TEMPLATE.format(bars="\n".join(parts), partial_note=partial_note, **theme)
+        mid = (spark_top + spark_bottom) / 2
+        start_px, start_py = pts[0]
+        start_dy = -8 if start_py > mid else 11
+        parts.append(
+            f'<text x="{start_px:.1f}" y="{start_py + start_dy:.1f}" text-anchor="start" '
+            f'class="point">{metric["fmt"](values[0])}</text>'
+        )
+
+        if i > 0:
+            div_x = x0 - gap / 2
+            parts.append(f'<line x1="{div_x:.1f}" x2="{div_x:.1f}" y1="14" y2="{spark_bottom}" class="div"/>')
+
+    year_span = f"{rows[0]['year']}–{rows[-1]['year']}" if rows else ""
+    caption = year_span + (" (latest partial)" if any(r["partial"] for r in rows) else "")
+    parts.append(f'<text x="{outer_pad}" y="122" class="delta">{caption}</text>')
+
+    return SVG_TEMPLATE.format(panels="\n".join(parts), **theme)
 
 
 def render_markdown_table(rows):

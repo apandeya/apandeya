@@ -1,45 +1,41 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 300" width="760" height="300" font-family="Helvetica, Arial, sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 130" width="760" height="130" font-family="Helvetica, Arial, sans-serif">
   <style>
     .bg { fill: #0d1117; }
-    .title { fill: #e6edf3; font-size: 15px; font-weight: 700; }
-    .sub { fill: #8b949e; font-size: 11px; }
-    .grid { stroke: #30363d; stroke-width: 1; }
-    .val { fill: #c9d1d9; font-size: 10px; font-family: "SF Mono", Consolas, monospace; }
-    .bar-pre { fill: #3987e5; }
-    .bar-ai { fill: #d95926; }
-    .yr { fill: #8b949e; font-size: 11px; }
-    .trend { fill: none; stroke: #e6edf3; stroke-width: 1.5; stroke-dasharray: 3 3; opacity: 0.6; }
-    .trend-dot { fill: #f0f0f0; }
+    .label { fill: #8b949e; font-size: 10.5px; letter-spacing: 0.02em; }
+    .value { fill: #c9d1d9; font-size: 17px; font-weight: 700; font-family: "SF Mono", Consolas, monospace; }
+    .delta { fill: #8b949e; font-size: 10px; font-family: "SF Mono", Consolas, monospace; }
+    .div { stroke: #30363d; stroke-width: 1; }
+    .spark { fill: none; stroke: #8b949e; stroke-width: 1.6; }
+    .spark-dot { fill: #d95926; }
+    .point { fill: #8b949e; font-size: 8.5px; font-family: "SF Mono", Consolas, monospace; }
   </style>
-  <rect class="bg" width="760" height="300" rx="10"/>
-  <text x="24" y="30" class="title">Lines changed per active coding day</text>
-  <text x="24" y="48" class="sub">personal commit history, aggregated by year (* = partial year)</text>
-<path d="M 100.5 222.4 L 217.5 219.5 L 334.5 224.0 L 451.5 237.5 L 568.5 216.2 L 685.5 94.8" class="trend"/>
-<line x1="50" x2="736" y1="196.7" y2="196.7" class="grid"/>
-<line x1="50" x2="736" y1="133.3" y2="133.3" class="grid"/>
-<line x1="50" x2="736" y1="70.0" y2="70.0" class="grid"/>
-<rect x="50.0" y="222.4" width="101.0" height="37.6" rx="4" class="bar-pre"/>
-<text x="100.5" y="214.4" text-anchor="middle" class="val">693</text>
-<text x="100.5" y="280.0" text-anchor="middle" class="yr">2021</text>
-<rect x="167.0" y="219.5" width="101.0" height="40.5" rx="4" class="bar-pre"/>
-<text x="217.5" y="211.5" text-anchor="middle" class="val">747</text>
-<text x="217.5" y="280.0" text-anchor="middle" class="yr">2022</text>
-<rect x="284.0" y="224.0" width="101.0" height="36.0" rx="4" class="bar-pre"/>
-<text x="334.5" y="216.0" text-anchor="middle" class="val">664</text>
-<text x="334.5" y="280.0" text-anchor="middle" class="yr">2023</text>
-<rect x="401.0" y="237.5" width="101.0" height="22.5" rx="4" class="bar-pre"/>
-<text x="451.5" y="229.5" text-anchor="middle" class="val">416</text>
-<text x="451.5" y="280.0" text-anchor="middle" class="yr">2024</text>
-<rect x="518.0" y="216.2" width="101.0" height="43.8" rx="4" class="bar-pre"/>
-<text x="568.5" y="208.2" text-anchor="middle" class="val">807</text>
-<text x="568.5" y="280.0" text-anchor="middle" class="yr">2025</text>
-<rect x="635.0" y="94.8" width="101.0" height="165.2" rx="4" class="bar-ai"/>
-<text x="685.5" y="86.8" text-anchor="middle" class="val">3,046</text>
-<text x="685.5" y="280.0" text-anchor="middle" class="yr">2026*</text>
-<circle cx="100.5" cy="222.4" r="2.5" class="trend-dot"/>
-<circle cx="217.5" cy="219.5" r="2.5" class="trend-dot"/>
-<circle cx="334.5" cy="224.0" r="2.5" class="trend-dot"/>
-<circle cx="451.5" cy="237.5" r="2.5" class="trend-dot"/>
-<circle cx="568.5" cy="216.2" r="2.5" class="trend-dot"/>
-<circle cx="685.5" cy="94.8" r="2.5" class="trend-dot"/>
+  <rect class="bg" width="760" height="130" rx="10"/>
+<text x="20.0" y="20" class="label">LOC / active day</text>
+<text x="20.0" y="42" class="value">3,046</text>
+<text x="20.0" y="57" class="delta">▲ 277% vs prior yr</text>
+<path d="M 20.0 102.0 L 53.9 101.2 L 87.8 102.4 L 121.7 106.0 L 155.6 100.3 L 189.5 68.0" class="spark"/>
+<circle cx="189.5" cy="68.0" r="2.8" class="spark-dot"/>
+<text x="20.0" y="94.0" text-anchor="start" class="point">693</text>
+<text x="203.5" y="20" class="label">Median commit size</text>
+<text x="203.5" y="42" class="value">34.5</text>
+<text x="203.5" y="57" class="delta">▼ 9% vs prior yr</text>
+<path d="M 203.5 103.8 L 237.4 106.0 L 271.3 104.9 L 305.2 106.0 L 339.1 68.0 L 373.0 71.9" class="spark"/>
+<circle cx="373.0" cy="71.9" r="2.8" class="spark-dot"/>
+<text x="203.5" y="95.8" text-anchor="start" class="point">6</text>
+<line x1="196.5" x2="196.5" y1="14" y2="106" class="div"/>
+<text x="387.0" y="20" class="label">Commits / active day</text>
+<text x="387.0" y="42" class="value">8.1</text>
+<text x="387.0" y="57" class="delta">▲ 147% vs prior yr</text>
+<path d="M 387.0 76.5 L 420.9 85.8 L 454.8 80.8 L 488.7 90.1 L 522.6 106.0 L 556.5 68.0" class="spark"/>
+<circle cx="556.5" cy="68.0" r="2.8" class="spark-dot"/>
+<text x="387.0" y="87.5" text-anchor="start" class="point">7.0</text>
+<line x1="380.0" x2="380.0" y1="14" y2="106" class="div"/>
+<text x="570.5" y="20" class="label">Repos touched</text>
+<text x="570.5" y="42" class="value">33</text>
+<text x="570.5" y="57" class="delta">▲ 83% vs prior yr</text>
+<path d="M 570.5 106.0 L 604.4 87.8 L 638.3 82.9 L 672.2 87.8 L 706.1 92.8 L 740.0 68.0" class="spark"/>
+<circle cx="740.0" cy="68.0" r="2.8" class="spark-dot"/>
+<text x="570.5" y="98.0" text-anchor="start" class="point">10</text>
+<line x1="563.5" x2="563.5" y1="14" y2="106" class="div"/>
+<text x="20" y="122" class="delta">2021–2026 (latest partial)</text>
 </svg>
