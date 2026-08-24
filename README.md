@@ -9,7 +9,7 @@
   <img alt="Coding velocity by year" src="stats/coding-velocity-light.svg">
 </picture>
 
-🔥 Active on 22 of the last 30 days &nbsp;·&nbsp; _last updated 2026-08-20_
+🔥 Active on 20 of the last 30 days &nbsp;·&nbsp; _last updated 2026-08-24_
 <!-- CHART:END -->
 
 <details>
@@ -19,11 +19,11 @@
 | Year | Commits | LOC changed | Active days | LOC/day | Median LOC/commit | Mean LOC/commit | Repos touched |
 |---|---|---|---|---|---|---|---|
 | 2021 | 436 | 42,976 | 62 | 693 | 6 | 98.6 | 10 |
-| 2022 | 954 | 121,837 | 163 | 747 | 4 | 127.7 | 21 |
-| 2023 | 1,069 | 109,628 | 165 | 664 | 5 | 102.6 | 24 |
-| 2024 | 567 | 44,482 | 107 | 416 | 4 | 78.5 | 21 |
-| 2025 | 377 | 92,832 | 115 | 807 | 38 | 246.2 | 18 |
-| 2026 \* | 860 | 322,900 | 106 | 3,046 | 34.5 | 375.5 | 33 |
+| 2022 | 1,182 | 173,764 | 181 | 960 | 5 | 147 | 22 |
+| 2023 | 1,373 | 125,828 | 185 | 680 | 6 | 91.6 | 25 |
+| 2024 | 781 | 53,914 | 135 | 399 | 4 | 69 | 22 |
+| 2025 | 385 | 93,070 | 117 | 795 | 38 | 241.7 | 19 |
+| 2026 \* | 879 | 328,461 | 108 | 3,041 | 36 | 373.7 | 33 |
 
 \* partial year
 <!-- STATS:END -->
