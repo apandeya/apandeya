@@ -9,7 +9,7 @@
   <img alt="Coding velocity by year" src="stats/coding-velocity-light.svg">
 </picture>
 
-🔥 Active on 20 of the last 30 days &nbsp;·&nbsp; _last updated 2026-08-24_
+🔥 Active on 20 of the last 30 days &nbsp;·&nbsp; _last updated 2026-08-31_
 <!-- CHART:END -->
 
 <details>
@@ -23,7 +23,7 @@
 | 2023 | 1,373 | 125,828 | 185 | 680 | 6 | 91.6 | 25 |
 | 2024 | 781 | 53,914 | 135 | 399 | 4 | 69 | 22 |
 | 2025 | 385 | 93,070 | 117 | 795 | 38 | 241.7 | 19 |
-| 2026 \* | 879 | 328,461 | 108 | 3,041 | 36 | 373.7 | 33 |
+| 2026 \* | 922 | 336,373 | 111 | 3,030 | 36.5 | 364.8 | 33 |
 
 \* partial year
 <!-- STATS:END -->
